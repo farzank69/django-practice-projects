@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
-# from django.template.loader import render_to_string
+from django.template.loader import render_to_string
 # Create your views here.
 
 monthly_challenges = {
@@ -44,4 +44,6 @@ def monthly_challenge(request,  month):
             })
     
     except:
-        return HttpResponseNotFound("<h1>This month is not supported!</h1>")
+        # response_data = render_to_string("404.html")
+        # return HttpResponseNotFound(response_data)  # Custom 404 page
+        raise Http404() # Default 404 page. Keep the 404.html file in templates directory for custom 404 page. # This won't work if DEBUG = True in settings.py
