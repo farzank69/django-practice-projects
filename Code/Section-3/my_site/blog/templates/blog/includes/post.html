@@ -1,0 +1,13 @@
+{% load static %}
+<li>
+    <article class="post">
+        <a href="{% url "post_detail" "the-mountains" %}">
+            <img src="{% static "blog/images/mountains.jpg" %}" alt="Mountain Hiking">
+            <div class="post__content">
+                <h3>Mountain Hiking</h3>
+                <p>July 20, 2024 | 5 Comments</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </a>
+    </article>
+</li>
