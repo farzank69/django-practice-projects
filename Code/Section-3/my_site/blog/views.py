@@ -3,11 +3,11 @@ from django.http import HttpResponse
 # Create your views here.
 
 def starting_post(request):
-    return HttpResponse("Hello, world. You're at the blog index.")
+    return render(request, 'blog/index.html')
 
 
 def posts(request):
-    return HttpResponse("Hello, world. You're at the blog posts.")  
+    return render(request, 'blog/all-posts.html')
 
 def post_detail(request, slug):
-    return HttpResponse(f"Hello, world. You're at the blog post: {slug}.")
+    return render(request, 'blog/post-detail.html')
