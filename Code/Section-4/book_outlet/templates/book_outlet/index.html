@@ -8,7 +8,8 @@ All Books
 {% block content %}
     <ul>
         {% for book in books %}
-            <li>{{book.title}} (rating: {{book.rating}}) </li>
+            {% comment %} <li><a href="{% url "book_detail" book.id %}">{{book.title}}</a>(rating: {{book.rating}})</li> {% endcomment %}
+            <li><a href="{{ book.get_absolute_url }}">{{book.title}}</a>(rating: {{book.rating}})</li>     {% comment %} Using get_absolute_url method from models.py to do the same task as url filter  {% endcomment %}
         {% endfor %}
     </ul>
 {% endblock content %}
