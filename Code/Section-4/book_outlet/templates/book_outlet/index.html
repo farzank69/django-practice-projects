@@ -9,7 +9,12 @@ All Books
     <ul>
         {% for book in books %}
             {% comment %} <li><a href="{% url "book_detail" book.id %}">{{book.title}}</a>(rating: {{book.rating}})</li> {% endcomment %}
-            <li><a href="{{ book.get_absolute_url }}">{{book.title}}</a>(rating: {{book.rating}})</li>     {% comment %} Using get_absolute_url method from models.py to do the same task as url filter  {% endcomment %}
+            <li><a href="{{ book.get_absolute_url }}">{{book.title}}</a>(rating: {{book.rating}})</li>   {% comment %}  Using get_absolute_url method from models.py to do the same task as url filter {% endcomment %}
         {% endfor %}
     </ul>
+
+    <hr>
+
+    <p>Total Numbers of Book {{ total_number_of_books}}</p>
+    <p>Average {{ average_rating.rating__avg }}</p>
 {% endblock content %}
