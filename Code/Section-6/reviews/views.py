@@ -8,7 +8,7 @@ def review(request):
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            form.save()                         #This will only save the new data, not gonna update the data.
             return HttpResponseRedirect('/thank-you')
     else:
         form = ReviewForm()
