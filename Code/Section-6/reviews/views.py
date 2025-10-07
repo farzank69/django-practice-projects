@@ -1,21 +1,40 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from . forms import ReviewForm
+from django.views import View
 
 # Create your views here.
+# Generic View
+class ReviewView(View):
+    def get(self, request):
+        form = ReviewForm()
+        return render(request, 'reviews/review.html', {
+            'form': form
+        })
 
-def review(request):
-    if request.method == "POST":
+    def post(self, request):
         form = ReviewForm(request.POST)
         if form.is_valid():
-            form.save()                         #This will only save the new data, not gonna update the data.
+            form.save()                        
             return HttpResponseRedirect('/thank-you')
-    else:
-        form = ReviewForm()
+
+        return render(request, 'reviews/review.html', {
+            'form': form
+        })
+
+
+# def review(request):
+#     if request.method == "POST":
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             form.save()                         #This will only save the new data, not gonna update the data.
+#             return HttpResponseRedirect('/thank-you')
+#     else:
+#         form = ReviewForm()
     
-    return render(request, 'reviews/review.html', {
-        'form': form
-    })
+#     return render(request, 'reviews/review.html', {
+#         'form': form
+#     })
 
 
 def thank_you(request):
