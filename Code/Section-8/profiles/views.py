@@ -1,12 +1,29 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponseRedirect
+from .forms import ProfileForm
 # Create your views here.
+
+# handle the file upload and store is somewhere.
+def store_file(file):
+    with open("temp/headshot.png", "wb+") as dest:      #Create and open the file
+        for chunk in file.chunks():
+            dest.write(chunk)
+
 
 class CreateProfileView(View):
     def get(self, request):
-        return render(request, "profiles/create_profile.html")
+        form = ProfileForm()
+        return render(request, "profiles/create_profile.html", {
+            "form": form
+        })
     
     def post(self, request):
-        print(request.FILES["image"])
-        return HttpResponseRedirect("/profiles")
+        submitted_form  = ProfileForm(request.POST,request.FILES)
+        if submitted_form.is_valid():
+            store_file(request.FILES["image"])
+            return HttpResponseRedirect("/profiles")
+
+        return render(request, "profiles/create_profile.html", {
+            "form": submitted_form
+        })
