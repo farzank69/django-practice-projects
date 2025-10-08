@@ -7,7 +7,7 @@ Review List
 {% block content %}
     <ul>
         {% for review in reviews %}
-            <li><a href="{% url "detail" id=review.pk %}">{{ review.user_name}}</a> (Rating:  {{ review.rating }})</li>
+            <li><a href="{% url "detail" pk=review.pk %}">{{ review.user_name}}</a> (Rating:  {{ review.rating }})</li>
         {% endfor %}
     </ul>
 {% endblock %}
