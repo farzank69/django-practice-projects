@@ -98,3 +98,12 @@ class ReviewDetailView(DetailView):
     template_name = "reviews/review_detail.html"
     model = Review          # In the template it will use lowercase 'review' name as a context to provide all the data of the model.
     
+
+class AddFavoriteView(View):
+    def post(self, request):
+        review_id = request.POST["review_id"]
+        # fav_review = Review.objects.get(pk=review_id)     # this is storing objects, so simply we're storing review_id in the session now.
+        request.session["favorite_review"] = review_id
+        return HttpResponseRedirect("/review-detail/" + review_id)
+    
+# KEY note: Don't store object in session. Just store simple values in sessions like string or other data but not objects.
