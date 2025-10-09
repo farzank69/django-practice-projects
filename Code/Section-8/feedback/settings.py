@@ -125,3 +125,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = "/user-media/"              #this allows the files to be visible to the website.
