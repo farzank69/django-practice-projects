@@ -36,7 +36,7 @@ class PostDetailView(View):
         post = Post.objects.get(slug=slug)
         context = {
             "post": post,
-            "post-tags": post.tags.all(),
+            "post_tags": post.tags.all(),
             "comment_form": CommentForm(), 
             "comments": post.comments.all()
         }
@@ -60,4 +60,30 @@ class PostDetailView(View):
         return render(request, "blog/post-detail.html", context)
 
 
+class ReadLaterView(View):
+    def get(self, request):
+        stored_post = request.session.get("stored_posts")
+        context = {}
+        if stored_post is None or len(stored_post) == 0:
+            context["posts"] = []
+            context["has_posts"] = False
+        else:
+            posts = Post.objects.filter(id__in= stored_post)      #id__in is the modifier which will check if the posts are there in the stored post or not.            
+            context["posts"] = posts
+            context["has_posts"] = True
+            
+        return render(request, "blog/stored-posts.html", context)
 
+
+    def post(self, request):
+        stored_post = request.session.get("stored_posts")
+
+        if stored_post is None:
+            stored_post = []
+        
+        post_id = int(request.POST["post_id"])
+        if post_id not in stored_post:
+            stored_post.append(post_id)
+            request.session["stored_posts"] = stored_post        # to store the session data for all the posts.
+
+        return HttpResponseRedirect("/")
