@@ -93,11 +93,18 @@ class ReviewListView(ListView):
 #         context["review"] = selected_data
         # return context
 
-#DetailView
+#DetailView      # Session 
 class ReviewDetailView(DetailView):
     template_name = "reviews/review_detail.html"
     model = Review          # In the template it will use lowercase 'review' name as a context to provide all the data of the model.
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        loaded_review = self.object
+        request = self.request
+        # favorite_id = request.session["favorite_review"]
+        favorite_id = request.session.get("favorite_review") # this is the safer way to get the session data this will not throw the error if it hasn't set before.
+        context["is_favorite"] = favorite_id == str(loaded_review.id)      # here checking the session data with the favorite id and comparing it if they are equal that's means we return it on the web.
+        return context 
 
 class AddFavoriteView(View):
     def post(self, request):
