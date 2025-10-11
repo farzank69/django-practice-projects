@@ -4,6 +4,7 @@ from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import StudentSerializer
+from .models import Student
 import io
 # Create your views here.
 # Deserialization Process (create, update, or delete)
@@ -22,3 +23,22 @@ def create_student(request):
             json_data = JSONRenderer().render(res)
             return HttpResponse(json_data, content_type='application/json')
         return JsonResponse(serializer.errors)
+    
+
+
+def read_student_api(request):
+    if request.method == "GET":
+        json_data = request.body
+        stream = io.BytesIO(json_data)
+        python_data = JSONParser().parse(stream)
+        id = python_data.get('id', None)
+        if id is not None:
+            student_data = Student.objects.get(id=id)
+            serializer = StudentSerializer(student_data)
+            json_data = JSONRenderer().render(serializer.data)
+            return HttpResponse(json_data, content_type='applications/json')
+        
+        student_data = Student.objects.all()
+        serializer = StudentSerializer(student_data, many=True)
+        json_data = JSONRenderer().render(serializer.data)
+        return HttpResponse(json_data, content_type='application/json')

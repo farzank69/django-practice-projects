@@ -3,13 +3,13 @@ import requests
 import json
 URL = "http://127.0.0.1:8000/add/"
 
-data_ = {
-    "name": "Richard",
-    "roll": 117,
-    "city": "New Delhi"
+data = {
+    "name": "Henry",
+    "roll": 121,
+    "city": "New Jersey"
 }
 
-json_data = json.dumps(data_)
+json_data = json.dumps(data)
 req = requests.post(url=URL,data=json_data)
 data = req.json()
 print(data)
