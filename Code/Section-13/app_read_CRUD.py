@@ -11,4 +11,34 @@ def get_data(id = None):
     res = requests.get(url=URL, data = json_data)
     data = res.json()
     print(data)
-get_data()
+# get_data()
+
+def post_data():
+    data = {
+        "name": "Keveith",
+        "roll": 133,
+        "city": "Okhlahoma"
+    }
+
+    json_data = json.dumps(data)
+    res = requests.post(url=URL,data=json_data)
+    data = res.json()
+    print(data)
+
+# post_data()
+
+
+def update_data():
+    data = {
+        "id": 4,
+        "name": "Ken",
+        "roll": 133,
+        "city": "Kyoto"
+    }
+
+    json_data = json.dumps(data)
+    res = requests.put(url=URL,data=json_data)
+    data = res.json()
+    print(data)
+
+update_data()

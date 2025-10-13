@@ -10,6 +10,6 @@ data = {
 }
 
 json_data = json.dumps(data)
-req = requests.post(url=URL,data=json_data)
-data = req.json()
+res = requests.post(url=URL,data=json_data)
+data = res.json()
 print(data)
