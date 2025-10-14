@@ -22,3 +22,12 @@ class StudentSerializer(serializers.Serializer):
         if value >= 200:
             raise serializers.ValidationError('No empty seat!!')
         return value
+    
+
+    # Object Level Validation on multiple field.
+    def validate(self, data):
+        name = data.get('name')
+        city = data.get('city')
+        if name.lower() == 'harry' and city.lower() != 'los angeles':
+            raise serializers.ValidationError('City must be Los Angeles')
+        return data
