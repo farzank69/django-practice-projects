@@ -1,9 +1,15 @@
 from rest_framework import serializers
 from .models import Student
 
+#Validators
+def start_with_f(value):
+    if value[0].lower() != 'f':
+        raise serializers.ValidationError('Name should start with F')
+
+
 # Example to perform deserialization
 class StudentSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=100)
+    name = serializers.CharField(max_length=100, validators=[start_with_f])
     roll = serializers.IntegerField()
     city = serializers.CharField(max_length=50)
 
