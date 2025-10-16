@@ -20,5 +20,5 @@ from myapi import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('studentapi/',views.read_student_api)
+    path('studentapi/',views.StudentAPI.as_view())
 ]
