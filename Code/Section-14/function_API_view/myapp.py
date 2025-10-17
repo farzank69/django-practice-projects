@@ -19,9 +19,9 @@ def post_data():
         "roll": 115,
         "city": "Saint Denis"
     }
-
+    headers = {'content-Type': 'application/json'}
     json_data = json.dumps(data)
-    res = requests.post(url=URL,data=json_data)
+    res = requests.post(url=URL, headers=headers, data=json_data)
     data = res.json()
     print(data)
 
@@ -35,9 +35,10 @@ def update_data():
         "roll": 188,
         "city": "Hawaii"
     }
+    headers = {'content-Type': 'application/json'}
 
     json_data = json.dumps(data)
-    res = requests.put(url=URL,data=json_data)
+    res = requests.put(url=URL, headers=headers, data=json_data)
     data = res.json()
     print(data)
 
