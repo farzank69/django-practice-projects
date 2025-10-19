@@ -3,6 +3,6 @@ from django.urls import path
 from myapi import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('studentapi/', views.index),
+    path('studentapi/', views.student_api),
 
 ]
