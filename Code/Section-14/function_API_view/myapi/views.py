@@ -35,5 +35,13 @@ def student_api(request):
             serializer = StudentSerializer(stud)
             return Response(serializer.data)
         stud = Student.objects.all()
-        serializer = StudentSerializer(stud)
-        return Response(serializer.data, many=True)
+        serializer = StudentSerializer(stud, many=True)
+        return Response(serializer.data)
+
+    if request.method == "POST":
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Data created'})
+        return Response(serializer.errors)
+    

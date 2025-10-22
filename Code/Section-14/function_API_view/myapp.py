@@ -12,7 +12,7 @@ def get_data(id = None):
     res = requests.get(url=URL, headers=headers, data = json_data)
     data = res.json()
     print(data)
-get_data()
+# get_data()
 
 def post_data():
     data = {
@@ -26,7 +26,7 @@ def post_data():
     data = res.json()
     print(data)
 
-# post_data()
+post_data()
 
 
 def update_data():
