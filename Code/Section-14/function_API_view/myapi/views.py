@@ -45,3 +45,12 @@ def student_api(request):
             return Response({'msg': 'Data created'})
         return Response(serializer.errors)
     
+
+    if request.method == "PUT":
+        id = request.data.get('id')
+        student = Student.objects.get(pk=id )
+        serializer = StudentSerializer(student, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Data Updated!'})
+        return Response(serializer.errors)

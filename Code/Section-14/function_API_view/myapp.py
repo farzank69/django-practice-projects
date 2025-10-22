@@ -32,9 +32,9 @@ post_data()
 def update_data():
     data = {
         "id": 8,
-        "name": "Arthur",
-        "roll": 188,
-        "city": "Hawaii"
+        "name": "Dutch",
+        "roll": 164,
+        "city": "San Francisco"
     }
     headers = {'content-Type': 'application/json'}
 
