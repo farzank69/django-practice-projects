@@ -26,10 +26,10 @@ from .serializers import StudentSerializer
 #         return Response({'msg': 'This is POST Request'})
 
 #Performing CRUD using DRF
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
-def student_api(request):
+@api_view(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
+def student_api(request, pk=None):
     if request.method == "GET":
-        id = request.data.get('id')
+        id = pk
         if id is not None:
             stud = Student.objects.get(id=id)
             serializer = StudentSerializer(stud)
@@ -47,10 +47,25 @@ def student_api(request):
     
 
     if request.method == "PUT":
-        id = request.data.get('id')
+        id = pk
         student = Student.objects.get(pk=id )
         serializer = StudentSerializer(student, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'Data Updated!'})
         return Response(serializer.errors)
+    
+    if request.method == "PATCH":
+        id = pk
+        student = Student.objects.get(pk=id )
+        serializer = StudentSerializer(student, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Partial Data Updated!'})
+        return Response(serializer.errors)
+    
+    if request.method == "DELETE":
+        id = pk
+        student = Student.objects.get(pk=id)
+        student.delete()
+        return Response({'msg': 'Data Deleted'})

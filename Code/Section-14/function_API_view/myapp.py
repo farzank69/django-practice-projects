@@ -26,12 +26,12 @@ def post_data():
     data = res.json()
     print(data)
 
-post_data()
+# post_data()
 
 
 def update_data():
     data = {
-        "id": 8,
+        "id": 1,
         "name": "Dutch",
         "roll": 164,
         "city": "San Francisco"
@@ -43,7 +43,7 @@ def update_data():
     data = res.json()
     print(data)
 
-# update_data()
+update_data()
 
 
 def delete_data():
