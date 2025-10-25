@@ -47,8 +47,7 @@ def student_api(request, pk=None):
     
 
     if request.method == "PUT":
-        id = pk
-        student = Student.objects.get(pk=id )
+        student = Student.objects.get(pk=pk)
         serializer = StudentSerializer(student, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -56,8 +55,7 @@ def student_api(request, pk=None):
         return Response(serializer.errors)
     
     if request.method == "PATCH":
-        id = pk
-        student = Student.objects.get(pk=id )
+        student = Student.objects.get(pk=pk)
         serializer = StudentSerializer(student, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -65,7 +63,6 @@ def student_api(request, pk=None):
         return Response(serializer.errors)
     
     if request.method == "DELETE":
-        id = pk
-        student = Student.objects.get(pk=id)
+        student = Student.objects.get(pk=pk)
         student.delete()
         return Response({'msg': 'Data Deleted'})

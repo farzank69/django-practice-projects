@@ -16,9 +16,9 @@ def get_data(id = None):
 
 def post_data():
     data = {
-        "name": "Francios",
-        "roll": 115,
-        "city": "Saint Denis"
+        "name": "John Marston",
+        "roll": 142,
+        "city": "Valentine"
     }
     headers = {'content-Type': 'application/json'}
     json_data = json.dumps(data)
@@ -26,7 +26,7 @@ def post_data():
     data = res.json()
     print(data)
 
-# post_data()
+post_data()
 
 
 def update_data():
@@ -43,7 +43,7 @@ def update_data():
     data = res.json()
     print(data)
 
-update_data()
+# update_data()
 
 
 def delete_data():
