@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from .models import Student
 from .serializers import StudentSerializer
 
-# Create your views here.
 
 # @api_view()    #by default it would be get method
 # def index(request):
