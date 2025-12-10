@@ -69,4 +69,46 @@ def read_student_api(request):
         res = {'msg': 'Data Deleted!!'}
         # json_data = JSONRenderer().render(res)
         # return HttpResponse(json_data, content_type = 'application/json')
+        return JsonResponse(res, safe=False)    
+    
+@csrf_exempt
+def student_api(request, pk=None):  # function task is to handle all CRUD operations
+    if request.method == "GET":
+        if pk is not None:
+            student = Student.objects.get(id=pk)
+            serializer = StudentSerializer(student)
+            return JsonResponse(serializer.data, safe=False)
+        
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    
+    if request.method == "POST":
+        json_data = request.body
+        stream = io.BytesIO(json_data)
+        python_data = JSONParser().parse(stream)
+        serializer = StudentSerializer(data=python_data)
+        if serializer.is_valid():
+            serializer.save()
+            res = {'msg': 'Data created'}
+            return JsonResponse(res, safe=False)
+        return JsonResponse(serializer.errors, safe=False)
+    
+    if request.method == "PUT":
+        json_data = request.body
+        stream = io.BytesIO(json_data)
+        python_data = JSONParser().parse(stream)
+        id = python_data.get('id')
+        student = Student.objects.get(id=id)
+        serializer = StudentSerializer(student, data=python_data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            res = {'msg': 'Data Updated!'}
+            return JsonResponse(res, safe=False)
+        return JsonResponse(serializer.errors, safe=False)
+    
+    if request.method == "DELETE":
+        student = Student.objects.get(id=pk)
+        student.delete()
+        res = {'msg': 'Data Deleted!!'}
         return JsonResponse(res, safe=False)
