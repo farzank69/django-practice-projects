@@ -112,3 +112,7 @@ def student_api(request, pk=None):  # function task is to handle all CRUD operat
         student.delete()
         res = {'msg': 'Data Deleted!!'}
         return JsonResponse(res, safe=False)
+
+@csrf_exempt
+def teacher_api(request, pk=None):
+    pass      
