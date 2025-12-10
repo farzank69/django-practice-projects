@@ -4,3 +4,4 @@ from .models import Student
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('id','name', 'roll', 'city')
 admin.site.register(Student, StudentAdmin)
+admin.site.site_header = "Student Administration"
