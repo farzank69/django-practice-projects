@@ -39,4 +39,11 @@ class StudentSerializer(serializers.Serializer):
         return data
     
     def __str__(self):
-        return self.name   
+        return self.name 
+    
+class TeacherSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=100)
+    subject = serializers.CharField(max_length=50)     
+
+    def __str__(self):
+        return self.name    
