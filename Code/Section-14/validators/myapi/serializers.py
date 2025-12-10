@@ -37,3 +37,6 @@ class StudentSerializer(serializers.Serializer):
         if name.lower() == 'harry' and city.lower() != 'los angeles':
             raise serializers.ValidationError('City must be Los Angeles')
         return data
+    
+    def __str__(self):
+        return self.name   
