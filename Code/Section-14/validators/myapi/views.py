@@ -116,3 +116,7 @@ def student_api(request, pk=None):  # function task is to handle all CRUD operat
 @csrf_exempt
 def teacher_api(request, pk=None):
     pass      
+
+@csrf_exempt
+def course_api(request, pk=None):
+    pass
