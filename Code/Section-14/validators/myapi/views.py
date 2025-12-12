@@ -119,4 +119,22 @@ def teacher_api(request, pk=None):
 
 @csrf_exempt
 def course_api(request, pk=None):
-    pass
+    if request.method == "GET":
+        if pk is not None:
+            course = Course.objects.get(id=pk)
+            serializer = CourseSerializer(course)
+            return JsonResponse(serializer.data, safe=False)
+        
+        courses = Course.objects.all()
+        serializer = CourseSerializer(courses, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    if request.method == "POST":
+        json_data = request.body
+        stream = io.BytesIO(json_data)
+        python_data = JSONParser().parse(stream)
+        serializer = CourseSerializer(data=python_data)
+        if serializer.is_valid():
+            serializer.save()
+            res = {'msg': 'Data created'}
+            return JsonResponse(res, safe=False)
+        return JsonResponse(serializer.errors, safe=False)  
