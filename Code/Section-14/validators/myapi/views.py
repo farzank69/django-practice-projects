@@ -138,3 +138,8 @@ def course_api(request, pk=None):
             res = {'msg': 'Data created'}
             return JsonResponse(res, safe=False)
         return JsonResponse(serializer.errors, safe=False)  
+    
+
+@csrf_exempt
+def enrollment_api(request, pk=None):
+    pass
