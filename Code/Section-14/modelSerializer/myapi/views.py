@@ -40,22 +40,22 @@ class StudentAPI(View):
         json_data = JSONRenderer().render(serializer.errors)
         return HttpResponse(json_data, content_type='application/json')
     
-    def put(self, request, *args, **kwargs):
-        json_data = request.body
-        stream = io.BytesIO(json_data)
-        python_data = JSONParser().parse(stream)
-        id = python_data.get('id')
-        student = Student.objects.get(id=id)
-        serializer = StudentSerializer(student, data=python_data, partial=True)     #Updating Partially like name and city only
-        if serializer.is_valid():
-            serializer.save()
-            res = {
-                'msg': 'Data Updated!'
-            }
-            json_data = JSONRenderer().render(res)
-            return HttpResponse(json_data, content_type = 'application/json')
-        json_data = JSONRenderer().render(serializer.errors)
-        return HttpResponse(json_data, content_type = 'application/json')
+    # def put(self, request, *args, **kwargs):
+    #     json_data = request.body
+    #     stream = io.BytesIO(json_data)
+    #     python_data = JSONParser().parse(stream)
+    #     id = python_data.get('id')
+    #     student = Student.objects.get(id=id)
+    #     serializer = StudentSerializer(student, data=python_data, partial=True)     #Updating Partially like name and city only
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         res = {
+    #             'msg': 'Data Updated!'
+    #         }
+    #         json_data = JSONRenderer().render(res)
+    #         return HttpResponse(json_data, content_type = 'application/json')
+    #     json_data = JSONRenderer().render(serializer.errors)
+    #     return HttpResponse(json_data, content_type = 'application/json')
     
     def delete(self, request, *args, **kwargs):
         json_data = request.body
@@ -66,3 +66,5 @@ class StudentAPI(View):
         student.delete()
         res = {'msg': 'Data Deleted!!'}
         return JsonResponse(res, safe=False)
+
+
