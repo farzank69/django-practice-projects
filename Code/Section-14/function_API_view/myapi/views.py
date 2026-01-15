@@ -65,3 +65,6 @@ def student_api(request, pk=None):
         student = Student.objects.get(pk=pk)
         student.delete()
         return Response({'msg': 'Data Deleted'})
+    
+def home(request):
+    return render(request, 'myapi/home.html')
